@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+}
+<div id="dashboard">
+    @Html.Action("IndexPartial")
+
+</div>
+@Html.DevExpress().LoadingPanel(settings =>
+{
+    settings.Name = "ldpLoading";
+
+}).GetHtml();
+<script>
+    $(document).ready(function () {
+        setInterval(function () { loadIndexPartial(); }, 60000);
+    });
+    function loadIndexPartial() {
+        ldpLoading.Show();
+        $.ajax({
+            url: "@Url.Action("IndexPartial")",
+            success: function (obj) {
+                $('#dashboard').html(obj);
+                ldpLoading.Hide();
+            }
+        });
+    }
+    function scroll() {
+
+        $('iframe> html,iframe> body').animate({
+            scrollTop: $("#patients").offset().top
+        }, 2000);
+
+    }
+    function onclickMunicipality(data) {
+        $.ajax({
+            url: '@Url.Action("PatientsGridViewPartial")',
+            data: { municipality: $(data).attr('data-target') },
+            success: function (obj) {
+                $('#patients').html(obj);
+                scroll();
+            }
+        });
+    }
+    function showStatus(status) {
+        $.ajax({
+            url: '@Url.Action("PatientsGridViewPartial")',
+            data: { status: status },
+            success: function (obj) {
+                $('#patients').html(obj);
+                scroll();
+            }
+        });
+    }
+</script>

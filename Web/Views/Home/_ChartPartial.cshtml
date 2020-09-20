@@ -1,0 +1,25 @@
+@Html.DevExpress().Chart(settings => {
+    settings.Name = "PatientsChart";
+                                         settings.ControlStyle.CssClass = "img-responsive";
+    settings.Series.Add(s => {
+        s.SetDataMembers("Municipality", "Total");
+                                 
+        s.Views().PieSeriesView(pie =>
+        {
+            pie.SeriesLabel(l =>
+            {
+                l.Position = (PieSeriesLabelPosition) PointLabelPosition.Outside;
+                l.TextPattern = "{A}: {VP:P0}";
+                l.LineVisibility = DefaultBoolean.True;
+                l.Border.Visibility = DefaultBoolean.False;
+            });
+        });
+        s.LabelsVisibility = DefaultBoolean.True;
+    });
+    settings.Height = 600;
+    settings.Width = 2000;
+    settings.Legends.Default(s =>
+    {
+        
+    });
+}).Bind(Model).GetHtml()

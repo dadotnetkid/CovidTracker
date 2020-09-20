@@ -1,0 +1,86 @@
+﻿<div id="chartContainer" style="height: 370px !important;max-width: 100%;"></div>
+
+
+
+<script>
+
+    $(document).ready(function() {
+            var dataPoints = [];
+        var chart = new CanvasJS.Chart("chartContainer",
+            {
+                exportEnabled: true,
+                animationEnabled: true,
+                axisY: {
+                    includeZero: false //try changing it to true
+                },
+                data: [
+                    {
+                        type: "pie",
+                        click: onClick,
+                        toolTipContent: "{label}: {y}",
+                        showInLegend: "true",
+                        legendText: "{label}-{y}",
+                        indexLabelFontSize: 10,
+                        indexLabel: "{label}-{y}",
+                        dataPoints: dataPoints,
+                        indexLabelPlacement: "inside",
+                        startAngle: 90,
+                        indexLabelOrientation: "vertical",
+                        indexLabelFontColor: "white",
+                        showInLegend: false,
+                    }
+                ]
+            });
+
+        function addData(data) {
+            for (var i = 0; i < data.length; i++) {
+                dataPoints.push({
+                    label: data[i].Municipality,
+                    y: data[i].Total
+                });
+                console.log(data[i].Municipality + "-" + data[i].Total);
+                var html = '<li ><a href="#" data-target="' + data[i].Municipality + '" class="municipality" onclick="onclickMunicipality(this)">' + data[i].Municipality + '<span class="pull-right badge bg-blue">' + data[i].Total + '</span></a></li>';
+                $('#municipality-list').append(html);
+            }
+            hideIndexLabel();
+            chart.render();
+
+        }
+
+        var chartEvent;
+
+        function onClick(e) {
+            $.ajax({
+                url: '@Url.Action("PatientsGridViewPartial")',
+                data: { municipality: e.dataPoint.label },
+                success: function (obj) {
+                    $('#patients').html(obj);
+                    scroll();
+                }
+            });
+        }
+
+
+        function hideIndexLabel() {
+            var length = chart.options.data[0].dataPoints.length;
+            for(var i = 0; i < length; i++ ) {
+                if( chart.options.data[0].dataPoints[i].y === 0  || chart.options.data[0].dataPoints[i].y === null ) {
+                    chart.options.data[0].dataPoints[i].indexLabel = " ";
+                    chart.options.data[0].dataPoints[i].indexLabelLineThickness = 0;
+                }
+                else
+                    chart.options.data[0].dataPoints[i].indexLabel = chart.options.data[0].dataPoints[i].indexLabel;
+            }
+        }
+
+
+        $.getJSON("@Url.Action("ChartDataPartial")", addData);
+    })
+</script>
+<div class="box box-widget widget-user-2">
+    <!-- Add the bg color to the header using any of the bg-* classes -->
+
+    <div class="box-footer no-padding">
+        <ul class="nav nav-stacked" id="municipality-list"></ul>
+    </div>
+</div>

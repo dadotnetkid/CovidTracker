@@ -1,0 +1,121 @@
+﻿@{
+    var visible = true;
+}
+<div class="jumbotron" style="text-align: center; background-color: #003300 !important; color: white !important">
+    <h1>NUEVA VIZCAYA</h1>
+    <h1></h1>
+    <h1 style="color: red"> COVID - 19</h1>
+    <h1>OFFICIAL TRACKER</h1>
+    <h2 class="mobile">Data as of @DateTime.Now.ToString("MMM dd, yyyy hh:mm:ss tt")  </h2>
+    @if (visible)
+    {
+        <a href="@Url.Action("Print")" class="btn btn-primary">Print</a>
+    }
+
+</div>
+
+<div class="row ">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        @Html.Action("PUIPartial")
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        @Html.Action("AwaitingPartial")
+    </div>
+
+   
+
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        @Html.Action("NegativePartial")
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        @Html.Action("DischargedPartial")
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        @Html.Action("IsolationButNegative")
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        @Html.Action("DeadButNegativePartial")
+    </div>
+</div>
+<div class="row ">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        @Html.Action("confirmedPartial")
+    </div>
+
+</div>
+<div class="row">
+
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        @Html.Action("RecoveredPartial")
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        @Html.Action("DeathsPartial")
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        @Html.Action("IsolationPartial")
+    </div>
+</div>
+
+@if (visible)
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="text-center">PERSONS UNDER INVESTIGATION (PUIs)</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="patients">
+                @Html.Action("PatientsGridViewPartial", "home")
+            </div>
+        </div>
+    </div>
+
+    <div class="row ">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 img-responsive">
+            @Html.Action("BarPartial")
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @Html.Action("AggreateTotalPerGenderPartial")
+        </div>
+    </div>    
+    <div class="row">
+        <div class="col-lg-12">
+            @Html.Action("AggreateTotalPerHospitalPartial")
+        </div>
+    </div>   
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="well well-sm">
+            <span class="pull-left" hidden>
+                Para sa katanungan at karagdagang impormasyon
+                <b>0917-659-6959</b>
+            </span>
+            <span class="pull-right">
+                Source: Provincial Integrated Health Office
+                <br />
+                Disclaimer: Information listed in this web page may change at any time due to evolving situation.
+                <br />
+                <br />
+
+                <p style="text-align: right; font-size:10px">Developed by the Provincial Information Technology Division, Governor's Office </p>
+            </span>
+
+            <span class="clearfix">
+
+            </span>
+        </div>
+    </div>
+</div>

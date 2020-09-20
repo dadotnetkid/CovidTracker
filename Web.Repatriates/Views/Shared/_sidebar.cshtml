@@ -1,0 +1,17 @@
+﻿@using Web.Controllers
+@*<p>@ViewContext.RouteData.Values["Controller"].ToString()</p>*@
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <ul class="sidebar-menu" data-widget="tree">
+            <li class="header">MAIN NAVIGATION</li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == nameof(HomeController.Index) && ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")">
+                <a href="@Url.Action("Index", "Home")"><i class="ion ion-home"></i> <span>Dash Board</span></a>
+                </li>
+
+         
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>

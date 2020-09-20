@@ -1,0 +1,99 @@
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "PatientsGridView";
+        settings.Width = Unit.Percentage(100);
+        settings.CallbackRouteValues = new { Controller = "Home", Action = "PatientsGridViewPartial" };
+
+
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.ShowNewButtonInHeader = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+
+        settings.KeyFieldName = "Id";
+
+        settings.SettingsPager.Visible =false;
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = false;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCells;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = true;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 300;
+
+
+        settings.SettingsPager.Mode = GridViewPagerMode.ShowAllRecords;
+
+        settings.Columns.Add(col =>
+        {
+            col.FieldName = "Area";
+            col.Caption = "Municipality";
+        
+        });
+        settings.Columns.Add("Age");
+        settings.Columns.Add(col =>
+        {
+            col.FieldName = "Gender";
+            col.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var cbo = col.PropertiesEdit as ComboBoxProperties;
+            cbo.ValueField = "value";
+            cbo.TextField = "value";
+            cbo.DropDownStyle = DropDownStyle.DropDown;
+            cbo.DataSource = new UnitOfWork().PatientsRepo.Fetch().GroupBy(x => x.Gender).Select(x => new { value = x.Key }).ToList();
+        });
+        settings.Columns.Add(col =>
+        {
+            col.FieldName = "DateofArrival";
+            col.Caption = "Date of Admission";
+            col.SortAscending();
+            col.ColumnType = MVCxGridViewColumnType.DateEdit;
+
+        });
+        settings.Columns.Add(col =>
+        {
+            col.FieldName = "Hospital";
+            col.Caption = "Admitting Hospital";
+            col.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var cbo = col.PropertiesEdit as ComboBoxProperties;
+            cbo.ValueField = "value";
+            cbo.TextField = "value";
+            cbo.DropDownStyle = DropDownStyle.DropDown;
+            cbo.DataSource = new UnitOfWork().PatientsRepo.Fetch().GroupBy(x => x.Country).Select(x => new { value = x.Key }).ToList();
+        });
+        settings.Columns.Add(
+        col =>
+        {
+            col.FieldName = "Country";
+            col.Caption = "Place Visited";
+            col.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var cbo = col.PropertiesEdit as ComboBoxProperties;
+            cbo.ValueField = "value";
+            cbo.TextField = "value";
+            cbo.DropDownStyle = DropDownStyle.DropDown;
+            cbo.DataSource = new UnitOfWork().PatientsRepo.Fetch().GroupBy(x => x.Country).Select(x => new { value = x.Key }).ToList();
+        }
+        );
+        settings.Columns.Add(col =>
+        {
+            col.FieldName = "Result";
+            col.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var cbo = col.PropertiesEdit as ComboBoxProperties;
+            cbo.ValueField = "value";
+            cbo.TextField = "value";
+            cbo.DropDownStyle = DropDownStyle.DropDown;
+            cbo.DataSource = new UnitOfWork().PatientsRepo.Fetch().GroupBy(x => x.Result).Select(x => new { value = x.Key }).ToList();
+        });
+    
+    });
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()
