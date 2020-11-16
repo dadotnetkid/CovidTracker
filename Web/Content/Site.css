@@ -1,278 +1,126 @@
 ﻿body {
-    font-family: Roboto !important
+    background: black !important;
+    font-family: "Nunito" !important
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+div.min-width-77 .dxeRoot_Material td.dxeCLLSys.dxeCaptionCell_Material {
+    min-width: 95px !important;
 }
-
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
-}
-
 
 .margin-top-10 {
-    margin-top: 10px !important;
+    margin-top: 10px;
 }
 
-.margin-left-10 {
-    margin-left: 10px !important;
+.font-size-80 {
+    font-size: 65px !important;
 }
-
-.form-group-left .form-control-feedback {
-    left: 0 !important;
+.font-size-40 {
+    font-size: 40px !important
 }
-
-.form-group-left input[type=text], .form-group-left input[type=password] {
-    padding-left: 20px !important;
+.font-size-30 {
+    font-size: 30px !important
 }
-
-div#lessonPopup_PW-1 {
-    width: 100% !important;
+.card-height-255 {
+    height: 255px !important;
 }
-
-.collapse.in {
-    border-color: #009688;
-    border-left: 5px solid #009688 !important;
+.card-height-375 {
+    height: 375px !important;
 }
-
-.c-tables tr td {
-    padding-bottom: 5px !important;
+.font-size-20 {
+    font-size: 20px !important
 }
-
-.panel.panel-default {
-    -ms-border-radius: 0px !important;
-    border-radius: 0px !important;
+.color-blue {
+    color: #0A4567  !important;
 }
-
-.panel-default .panel-heading {
+.font-size-120 {
+    font-size: 120px !important;
+}
+.line {
+    border: 1px solid white;
+    margin-bottom: 30px !important;
     background-color: white !important;
 }
 
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    font-family: 'Roboto';
-    font-weight: 600;
+.card-body-298 {
+    height: 298px !important;
 }
-
-#container {
-    padding-top: 10px !important;
-}
-
-.material {
-    -ms-border-radius: 0px !important;
-    border-radius: 0px !important
-}
-
-    .material.alert-danger {
-        color: #7f231c !important;
-        background-color: #fdd9d7 !important;
-        border-color: #fccac7 !important;
-    }
-
-.visible-alert {
-    display: none !important;
-}
-
-.ui-effects-wrapper {
-    display: inline;
-}
-
-.dxeCLLSys label {
-    min-width: 140px;
-    text-align: right;
-    max-width: 110px !important;
-}
-
-.text-left {
-    text-align: left !important;
-}
-
-
-.file-manager .col-md-12 {
-    width: 33.33% !important;
-}
-
-.token-max-height-200 .dxic.dxictb {
-    overflow: auto !important;
-    max-height: 200px !important;
-}
-
-.white-space-normal {
-    white-space: normal !important;
-}
-
-@media only screen and (max-width: 1280px) {
-    /* STYLES HERE for DEVICES with physical max-screen width of 480px */
-    .td-min-width {
-        max-width: 70px;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-    }
-}
-
-.p-danger {
-    color: red !important;
-}
-
-.dxeCLLSys label.quarries {
-    max-width: 500px !important;
-}
-
-#dashboard h1.title {
-    font-size: 180px;
-}
-
-#dashboard p.count {
-    font-size: 55px;
-}
-
-.small-box {
-    text-decoration: none;
-    color: #f9f9f9 !important;
-}
-
-@media only screen and (max-width: 360px) {
-    #dashboard .count.mobile {
-    }
-
-    h2.mobile {
-        font-size: 10px !important;
-    }
-}
-
-.mobile {
-    font-size: 10px !important;
-}
-
-@media only screen and (max-width: 450px) {
-    #dashboard h2.title {
-        font-size: 15px;
-    }
-
-    #dashboard h1.count, #dashboard h1.count.text-total-pui {
-        font-size: 18px;
-    }
-    /*#dashboard h2.count {
-        font-size: px !important;
-    }*/
-
-
-    h1.title {
-        font-size: 10px;
-        margin: 0 !important;
-    }
-
-    h2, h1 {
-        margin: 0 !important;
-    }
-
-    .small-box {
-        height: 75px !important;
-    }
-
-    .well {
-        padding: 5px !important;
-        padding-top: 15px !important;
-        padding-bottom: 15px !important;
-    }
-
-    #dashboard h2.title.text-total-pui {
-        font-size: 17px;
-    }
-}
-
-#PatientsChart img {
-    max-width: 100% !important;
-    height: auto !important;
-}
-
-#PatientsChart {
-    height: auto !important;
-}
-
-.elementor-column-gap-default > .elementor-row > .elementor-column > .elementor-element-populated {
-    padding: 0px !important;
-}
-
-.jumbotron h1 {
-    margin: 0px !important;
-    font-size: 18px !important
-}
-
-.container-full {
-    padding: 0px !important;
-}
-
-.bg-recovered {
-    background: #9800FF !important;
-    color: white
-}
-
-.bg-death {
-    background: #FF00FF !important;
-    color: white
-}
-
-.bg-awaiting {
-    background: #cc9900 !important;
-    color: white;
-}
-
-.bg-isolation-negative {
-    background: #0dd463 !important;
-    color: white;
-}
-
-.panel-black {
-    background-color: #272627 !important;
+.text-color-white {
     color: white !important;
 }
 
-    .panel-black > .panel-body {
-    }
+.bg-yellow {
+    background: yellow !important;
+}
 
-.bg-black {
-    background-color: #121113 !important;
+.bg-green {
+    background: green !important;
+}
+
+.bg-grey {
+    background: gray !important;
+}
+
+.height-395 {
+    height: 358px;
+}
+
+.card {
+    border-radius: 0px !important;
+}
+
+.hero {
+    background: green !important;
+    color: white !important;
+    padding: 10px;
+}
+
+.no-margin {
+}
+
+.active-cases {
+    background: #FAA318 !important;
+}
+
+.recovered-cases {
+    background: #296C5A !important;
+}
+
+.expired-cases {
+    background: #6F1D1F !important;
+}
+
+.no-padding {
+    padding: 0px !important;
+}
+
+.total-cases {
+    background: #615353 !important;
+    
+}
+    .total-cases h4 {
+        padding-top: 65px !important;
+    }
+.new-case {
+    background: #06466A !important;
     color: white;
 }
 
-.header {
-    font-size: 36px;
-    font-weight: 100;
+.total-mild-cases-image {
+    background-image: url('Images/covid.jpg') !important;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-.sub-header {
-    font-size: 30px;
+.overlay {
+    background: rgba(0, 0, 0, 0.75);
 }
-
-.color-confirmed {
-    color: #00B050 !important;
+.card-body-250 {
+    height: 250px !important;
 }
-
-.color-negative {
-    color: #7030A0 !important;
+.height-152 {
+    height: 152px;
 }
-
-.color-suspect {
-    color: #F00000 !important;
+.card-height-275 {
+    height: 275px !important;
 }
-
-.color-awaiting {
-    color: #0070C0 !important;
-}
-
-.total-count {
-    color: #FF6320 !important;
-    font-weight: bolder;
-}
-
-.total-count {
-    font-size: 60px !important;
-}
-

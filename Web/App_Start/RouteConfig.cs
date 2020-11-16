@@ -16,14 +16,10 @@ namespace Web
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "repatriates", action = "login", id = UrlParameter.Optional }
+                defaults: new { controller = "home", action = "dashboard", id = UrlParameter.Optional }
             );
 
-            routes.MapRoute(
-                name: "Admin",
-                url: "admin/index/{id}",
-                defaults: new { controller = "admin", action = "index", id = UrlParameter.Optional }
-            );
+           
 
             routes.MapMvcAttributeRoutes();
         }

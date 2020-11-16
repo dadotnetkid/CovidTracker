@@ -1,0 +1,61 @@
+﻿@{
+    var db = new ModelDb();
+}
+<div class="row">
+    <div class="col-3">
+        <div class="card bg-green">
+            <div class="card-body">
+                <h2 class="text-center">
+                    Single
+                </h2>
+                <h1 class="font-size-80 text-color-white text-center">
+                    @{
+                        ViewContext.Writer.Write(db.Residents.Count(x => x.CivilStatusID == "Single"));
+                    }
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="card bg-danger">
+            <div class="card-body">
+                <h2 class="text-center">
+                    Married
+                </h2>
+                <h1 class="font-size-80 text-color-white text-center">
+                    @{
+                        ViewContext.Writer.Write(db.Residents.Count(x => x.CivilStatusID == "Married"));
+                    }
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="card bg-danger">
+            <div class="card-body">
+                <h2 class="text-center">
+                    Divorced
+                </h2>
+                <h1 class="font-size-80 text-color-white text-center">
+                    @{
+                        ViewContext.Writer.Write(db.Residents.Count(x => x.CivilStatusID == "Divorced"));
+                    }
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="card bg-danger">
+            <div class="card-body">
+                <h2 class="text-center">
+                    Widowed
+                </h2>
+                <h1 class="font-size-80 text-color-white text-center">
+                    @{
+                        ViewContext.Writer.Write(db.Residents.Count(x => x.CivilStatusID == "Widowed"));
+                    }
+                </h1>
+            </div>
+        </div>
+    </div>
+</div>

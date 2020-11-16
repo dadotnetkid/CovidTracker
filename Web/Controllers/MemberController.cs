@@ -81,8 +81,8 @@ namespace Web.Controllers
                 ModelState.AddModelError("UserName", "Username not exist");
                 return View(model);
             }
-
-            var result = await SignInManager.PasswordSignInAsync(user?.UserName, model.Password, model.RememberMe ?? false, shouldLockout: false);
+            
+            var result = await SignInManager.PasswordSignInAsync(user?.UserName,model.Password, model.RememberMe ?? false, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -111,11 +111,7 @@ namespace Web.Controllers
         //    return RedirectToAction("Login");
         //}
 
-        public ActionResult RegisterPartial(RegistrationType registrationType)
-        {
-            return PartialView(new RegisterViewModel() { RegistrationType = registrationType });
-        }
-
+     
 
         private ActionResult RedirectToLocal(string returnUrl)
         {
@@ -129,7 +125,7 @@ namespace Web.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Transactions");
+            return RedirectToAction("index", "home");
         }
         private IAuthenticationManager AuthenticationManager
         {

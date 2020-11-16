@@ -1,0 +1,72 @@
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "BatchGridView";
+        settings.Width = Unit.Percentage(100);
+        settings.CallbackRouteValues = new {Controller = "Patients", Action = "BatchGridViewPartial"};
+
+        settings.SettingsEditing.AddNewRowRouteValues = new {Controller = "Patients", Action = "BatchGridViewPartialAddNew"};
+        settings.SettingsEditing.UpdateRowRouteValues = new {Controller = "Patients", Action = "BatchGridViewPartialUpdate"};
+        settings.SettingsEditing.DeleteRowRouteValues = new {Controller = "Patients", Action = "BatchGridViewPartialDelete"};
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+
+        settings.KeyFieldName = "Id";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = true;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 300;
+        settings.AddEditDeleteToolbar(items =>
+        {
+            items.Delete = User.UserIsInAction("Delete Batch Number");
+            items.ToolBars = (s) =>
+            {
+                s.SetTemplateContent(cnt =>
+                {
+                    Html.DevExpress().Button(btn =>
+                    {
+                        btn.Text = "Generate Batch Number";
+                        btn.Name = "btnGenerate";
+                        btn.ClientSideEvents.Click = "function(s,e){GenerateBatchNumber()}";
+                    }).GetHtml();
+                });
+            };
+        });
+        settings.Columns.Add("BatchNumber");
+        settings.Columns.Add("CreatedAt");
+        settings.Columns.Add("ModifiedAt");
+        settings.Columns.Add("CreatedByUser.FullName").Caption = "Created By";
+        settings.Columns.Add("ModifiedByUser.FullName").Caption = "Modified By";
+        settings.Columns.Add(col =>
+        {
+            col.SetDataItemTemplateContent(content =>
+            {
+                Html.DevExpress().Button(btn =>
+                {
+                    btn.Name = "btnAddCase" + content.KeyValue;
+                    btn.Text = "Add Case";
+                    btn.ControlStyle.CssClass = "fa fa-pencil";
+                    btn.EncodeHtml = false;
+                    btn.RouteValues = new {controller = "Patients", action = "AddCases", batchnumber = DataBinder.Eval(content.DataItem, "batchnumber")};
+                }).GetHtml();
+            });
+        });
+    });
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string) ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

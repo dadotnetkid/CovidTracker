@@ -34,5 +34,10 @@ namespace Models
         public virtual DbSet<Actions> Actions { get; set; }
         public virtual DbSet<ActionTakens> ActionTakens { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<BatchNumbers> BatchNumbers { get; set; }
+        public virtual DbSet<Patients> Patients { get; set; }
+        public virtual DbSet<Residents> Residents { get; set; }
+        public virtual DbSet<Cases> Cases { get; set; }
+        public virtual DbSet<Municipality> Municipality { get; set; }
     }
 }

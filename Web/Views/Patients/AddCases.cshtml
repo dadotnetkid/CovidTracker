@@ -1,0 +1,49 @@
+﻿@using Breadcrumbs = Models.ViewModels.Breadcrumbs
+@model BatchNumbers
+@{
+    ViewBag.Breadcrumbs = new List<Breadcrumbs>()
+    {
+        new Breadcrumbs() {Breadcrumb = "Patients", ItemNumber = 1},
+        new Breadcrumbs() {Breadcrumb = "Batch", ItemNumber = 2, Url = Url.Action("batch", "patients")},
+        new Breadcrumbs() {Breadcrumb = "Add Cases", Active = true, ItemNumber = 3}
+    };
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@Html.Action("PatientsGridViewPartial", new {batch = Model})
+@{
+    Html.DevExpress().PopupControl(settings =>
+    {
+        settings.Name = "popupControl";
+        settings.HeaderText = "Search Case";
+        settings.Width = Unit.Pixel(1024);
+        settings.PopupHorizontalAlign = PopupHorizontalAlign.WindowCenter;
+        settings.SetContent(() => { ViewContext.Writer.Write("<div id='search-container'></div>"); });
+    }).GetHtml();
+}
+
+<script>
+    function searchAddCase() {
+        popupControl.Show();
+        ldpLoading.Show();
+        $.ajax({
+            url: '@Url.Action("SearchCasePartial")',
+            data: { Id: '@Model.Id' },
+            method: 'POST',
+            success: function(e) {
+                $('#search-container').html(e.view);
+                ldpLoading.Hide();
+                if (e.result == 0)
+                    alert("No result found");
+            }
+        });
+    }
+
+    function checkIfNoSearch(count) {
+        if (count == 0) {
+            var con = confirm("Do you want to add new case");
+
+        }
+    }
+</script>

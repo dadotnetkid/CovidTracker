@@ -1,15 +1,38 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.OleDb;
+using System.IO;
+using System.Web;
+using DevExpress.Web;
 
 namespace Helpers
 {
-  
+    public static class DevexpressHelper
+    {
+        public static string  SaveFile(this UploadedFile uploadedFile)
+        {
+            var extensionName = Path.GetExtension(uploadedFile.FileName);
+            string filename = "";
+            if (extensionName.ToLower().Contains("xlsx"))
+                filename = HttpContext.Current.Server.MapPath(System.IO.Path.Combine("~/content/excel", Guid.NewGuid().ToString() + ".xlsx"));
+            else
+                filename = HttpContext.Current.Server.MapPath(System.IO.Path.Combine("~/content/excel", Guid.NewGuid().ToString() + ".xls"));
+            uploadedFile.SaveAs(filename);
+            return filename;
+        }
+    }
     public class ExcelHelper
     {
-        public ExcelHelper(string Filename)
+        public ExcelHelper(string filename)
         {
-            connectionString = $"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={Filename};Extended Properties=Excel 8.0;HDR=Yes;";
+            var extensionName = Path.GetExtension(filename);
+            if (extensionName.ToLower().Contains("xlsx"))
+                connectionString = $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={filename};Extended Properties='Excel 12.0 Xml;HDR=Yes;IMEX=1'"; 
+            else
+                connectionString = $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={filename};Extended Properties='Excel 8.0;HDR=Yes;IMEX=1'";
         }
+
+
         public string ConnectionString { get { return connectionString; } set { connectionString = value; } }
         private string connectionString;
         public DataTable ExecuteReader()

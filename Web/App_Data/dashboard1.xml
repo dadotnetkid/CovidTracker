@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard CurrencyCulture="en-PH">
+  <Title Text="New Dashboard" />
+  <DataSources>
+    <SqlDataSource Name="Income" ComponentName="sqlDataSource1">
+      <Connection Name="sqlserver" FromAppConfig="true" />
+      <Query Type="SelectQuery" Name="Income">
+        <Tables>
+          <Table Name="Income" />
+        </Tables>
+        <Columns>
+          <Column Table="Income" Name="Barangay" />
+          <Column Table="Income" Name="Month" />
+          <Column Table="Income" Name="Income" />
+        </Columns>
+      </Query>
+      <ConnectionOptions CloseConnection="true" />
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <Pivot ComponentName="pivotDashboardItem1" Name="Pivot 1" DataSource="sqlDataSource1" DataMember="Income">
+      <DataItems>
+        <Measure DataMember="Income" DefaultId="DataItem0" />
+        <Dimension DataMember="Month" DefaultId="DataItem1" />
+        <Dimension DataMember="Barangay" DefaultId="DataItem3" />
+      </DataItems>
+      <Columns>
+        <Column DefaultId="DataItem1" />
+      </Columns>
+      <Rows>
+        <Row DefaultId="DataItem3" />
+      </Rows>
+      <Values>
+        <Value DefaultId="DataItem0" />
+      </Values>
+      <ShowRowGrandTotals>false</ShowRowGrandTotals>
+      <ValuesPosition>Rows</ValuesPosition>
+    </Pivot>
+  </Items>
+  <ColorScheme>
+    <Entry DataSource="sqlDataSource1" DataMember="Residents" Color="-13785557">
+      <DimensionKeys>
+        <DimensionKey>
+          <Definition DataMember="LabResultID" />
+          <Value Type="System.String" Value="GREEN" />
+        </DimensionKey>
+      </DimensionKeys>
+    </Entry>
+  </ColorScheme>
+  <LayoutTree>
+    <LayoutGroup>
+      <LayoutItem DashboardItem="pivotDashboardItem1" />
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>

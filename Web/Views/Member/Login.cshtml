@@ -4,73 +4,49 @@
 
 @{
     ViewBag.Title = "Login";
-    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    Layout = "~/Views/Shared/_Login_layout.cshtml";
 }
 
 
-@using (Html.BeginForm("login", "member", new { returnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { }))
+@using (Html.BeginForm("login", "member", new { returnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class="user"}))
 {
     @Html.AntiForgeryToken()
-
-    <div class="form-group has-feedback form-group-left">
-        @{
-            Html.DevExpress().TextBoxFor(m => m.UserName, settings =>
-            {
-                settings.Width = Unit.Percentage(100);
-                settings.Properties.ValidationSettings.RequiredField.IsRequired = true;
-                settings.Properties.ValidationSettings.SetFocusOnError = true;
-                settings.Properties.ValidationSettings.ValidateOnLeave = true;
-                settings.Properties.ValidationSettings.Display = Display.Dynamic;
-                settings.ShowModelErrors = true; ;
-            }).GetHtml();
-        }
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+<div class="p-5">
+    <div class="text-center">
+        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
     </div>
-    <div class="form-group has-feedback form-group-left">
-        @{
-            Html.DevExpress().TextBoxFor(m => m.Password, settings =>
-            {
-                settings.Width = Unit.Percentage(100);
-                settings.Properties.ValidationSettings.RequiredField.IsRequired = true;
-                settings.Properties.ValidationSettings.SetFocusOnError = true;
-                settings.Properties.ValidationSettings.ValidateOnLeave = true;
-                settings.Properties.ValidationSettings.Display = Display.Dynamic;
-                settings.Properties.Password = true;
-                settings.ShowModelErrors = true; ;
-            }).GetHtml();
-        }
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-    </div>
-
-
-
-
-    <div class="row">
-        <div class="col-xs-12">
-            @{
-                Html.DevExpress().CheckBoxFor(m => m.RememberMe, settings =>
-                  {
-                      settings.Text = "Remember me?";
-                  }).GetHtml();
-            }
-
+    <form class="user">
+        <div class="form-group">
+            <input type="text" name="UserName" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
         </div>
-        <!-- /.col -->
-        <div class="col-xs-12">
-            @{
-                Html.DevExpress().Button(settings =>
-                {
-                    settings.Name = "btnLogin";
-                    settings.Text = "Sign In";
-                    settings.UseSubmitBehavior = true;
-                    settings.Width = Unit.Percentage(100);
-                    //  settings.ControlStyle.CssClass = "btn btn-primary btn-block btn-flat";
-                }).GetHtml();
-            }
-
+        <div class="form-group">
+            <input type="password" name="Password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
         </div>
-        <!-- /.col -->
+        <div class="form-group">
+            <div class="custom-control custom-checkbox small">
+                <input type="checkbox" class="custom-control-input" name="RememberMe" id="customCheck">
+                <label class="custom-control-label" for="customCheck">Remember Me</label>
+            </div>
+        </div>
+        <button  class="btn btn-primary btn-user btn-block">
+            Login
+        </button>
+        <hr>
+        <a class="btn btn-google btn-user btn-block">
+            <i class="fab fa-google fa-fw"></i> Login with Google
+        </a>
+        <a href="index.html" class="btn btn-facebook btn-user btn-block">
+            <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+        </a>
+    </form>
+    <hr>
+    <div class="text-center">
+        <a class="small" href="forgot-password.html">Forgot Password?</a>
     </div>
+    <div class="text-center">
+        <a class="small" href="register.html">Create an Account!</a>
+    </div>
+</div>
 }
 
 
@@ -95,7 +71,6 @@
     </div>*@
 <!-- /.social-auth-links -->
 
-<a href="#" onclick="forgotShow()">I forgot my password</a><br>
 @*<a href="@Url.Action("register")" class="text-center">Register a new membership</a>*@
 
 

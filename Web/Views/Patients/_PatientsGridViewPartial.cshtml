@@ -1,0 +1,64 @@
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "PatientsGridView";
+        settings.Width = Unit.Percentage(100);
+        settings.CallbackRouteValues = new {Controller = "Patients", Action = "PatientsGridViewPartial", batchNumber = ViewBag.batchNumbers};
+
+        settings.SettingsEditing.AddNewRowRouteValues = new {Controller = "Patients", Action = "PatientsGridViewPartialAddNew", batchNumber = ViewBag.batchNumbers};
+        settings.SettingsEditing.UpdateRowRouteValues = new {Controller = "Patients", Action = "PatientsGridViewPartialUpdate", batchNumber = ViewBag.batchNumbers};
+        settings.SettingsEditing.DeleteRowRouteValues = new {Controller = "Patients", Action = "PatientsGridViewPartialDelete", batchNumber = ViewBag.batchNumbers};
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+
+        settings.KeyFieldName = "Id";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCells;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = true;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 300;
+
+        settings.AddEditDeleteToolbar(btnSettings =>
+        {
+            btnSettings.ToolBars = (s) =>
+            {
+                s.SetTemplateContent(content =>
+                {
+                    Html.DevExpress().Button(btn =>
+                    {
+                        btn.Name = "btnSearch";
+                        btn.Text = "Search(Add Cases)";
+                        btn.ClientSideEvents.Click = "function(s,e){searchAddCase()}";
+                    }).GetHtml();
+                });
+            };
+        });
+
+        settings.Columns.Add("LastName");
+        settings.Columns.Add("FirstName");
+        settings.Columns.Add("MiddleName");
+        settings.Columns.Add("Suffix");
+        settings.Columns.Add("DOB");
+        settings.Columns.Add("Age");
+        settings.Columns.Add("Sex");
+        settings.Columns.Add("CivilStatus");
+        settings.Columns.Add("Nationality");
+        settings.Columns.Add("Mobile");
+    });
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string) ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

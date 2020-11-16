@@ -20,6 +20,14 @@
         <AssociationConnector Association="Model.FK_UserClaims_Users" />
         <AssociationConnector Association="Model.FK_UserLogins_Users" />
         <AssociationConnector Association="Model.UsersInRoles" />
+        <EntityTypeShape EntityType="Model.BatchNumbers" Width="1.5" PointX="3.375" PointY="9.75" />
+        <AssociationConnector Association="Model.FK_BatchNumbers_Users" />
+        <AssociationConnector Association="Model.FK_BatchNumbers_Users1" />
+        <EntityTypeShape EntityType="Model.Patients" Width="1.5" PointX="5.625" PointY="11.625" />
+        <AssociationConnector Association="Model.FK_Patients_BatchNumbers" />
+        <EntityTypeShape EntityType="Model.Residents" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="Model.Cases" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.Municipality" Width="1.5" PointX="10.375" PointY="3.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

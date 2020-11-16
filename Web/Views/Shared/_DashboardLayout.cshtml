@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/site.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="row no-margin">
+            <div class="col-12 no-padding">
+                <div class="jumbotron-fluid hero ">
+                    <div class="row">
+                        <div class="col-1">
+                            <img src="~/Content/Images/logo.png" class="img-fluid"/>
+
+                        </div>
+                        <div class="col-4">
+                            <h4 class="font-weight-bolder" style="padding-top: 32px">E-GOVERNANCE INFORMATION SYSTEM</h4>
+                        </div>
+                        <div class="col-7">
+                            <div class="float-lg-right">
+                                <h1>@DateTime.Now.ToString("MMMM dd, yyyy")</h1>
+                                <p>Para sa kumpletong detalye at impormasyon, bisitahin </p>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                @RenderBody()
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,41 +1,85 @@
-﻿<!DOCTYPE html>
-<html class="@(Request.Browser.IsMobileDevice ? "bg-black":"") ">
+﻿@using Breadcrumbs = Models.ViewModels.Breadcrumbs
+<!DOCTYPE html>
+
+<html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - COVID 2019</title>
-    <link rel="icon" href="http://example.com/favicon.png">
-
-
-
-    @Scripts.Render("~/bundles/js")
-    @*<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>*@
-    @Styles.Render("~/content/css")
-    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    @Html.Partial("_header")
     @Html.Partial("_devexpress")
-
-
-    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-    <link href="~/Content/ionicons.min.css" rel="stylesheet" />
-    <meta name="google-site-verification" content="9j6lpwQM-_yfC6SVG1FrUHnlbpc-Qnt9KRCL-wOFY2Q" />
 </head>
-@*@{
-        Html.EnableClientValidation();
-        Html.EnableUnobtrusiveJavaScript();
-    }*@
+<body id="page-top">
 
-<body>
-    <div class=" @(Request.Browser.IsMobileDevice ? "container bg-black":"container-full container-fluid")  ">
-        @RenderBody()
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    @Html.Partial("_sidebar")
+    <!-- End of Sidebar -->
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            @Html.Partial("_navigation")
+            <!-- End of Topbar -->
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <h1 class="h3 mb-4 text-gray-800 float-left">@ViewBag.Title</h1>
+                @if (ViewBag.Breadcrumbs != null)
+                {
+                    <ol class="breadcrumb float-right">
+                        @if (ViewBag.Breadcrumbs is List<Breadcrumbs> breadcrumbs)
+                        {
+                            foreach (var i in breadcrumbs.OrderBy(x => x.ItemNumber).Where(x => x.Active != true))
+                            {
+                                <li class="breadcrumb-item">
+                                    <a href="@i.Url">@i.Breadcrumb</a>
+                                </li>
+                            }
+
+                            <li class="breadcrumb-item active" aria-current="page">
+                                @{ ViewContext.Writer.Write(breadcrumbs.FirstOrDefault(x => x.Active == true)?.Breadcrumb); }
+                            </li>
+                        }
+
+
+                    </ol>
+                }
+
+
+                <!-- Page Heading -->
+                @RenderBody()
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+        <!-- Footer -->
+        @Html.Partial("_footer")
+        <!-- End of Footer -->
+
     </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+@Html.Partial("_logout_modal")
 </body>
+<!-- Bootstrap core JavaScript-->
+
 </html>
-<script>
-    function hideLoading() {
-        ldpPanel.Hide();
-    }
-    function showLoading() {
-        ldpPanel.Show();
-    }
-</script>
+
+
+@Html.DevExpress().LoadingPanel(settings =>
+{
+    settings.Name = "ldpLoading";
+    settings.Modal = true;
+}).GetHtml()

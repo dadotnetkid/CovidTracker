@@ -1,0 +1,33 @@
+﻿@{
+    var db = new ModelDb();
+}
+<div class="row">
+    <div class="col-6">
+        <div class="card bg-green">
+            <div class="card-body">
+                <h2 class="text-center">
+                    Male
+                </h2>
+                <h1 class="font-size-80 text-color-white text-center">
+                    @{
+                        ViewContext.Writer.Write(db.Residents.Count(x => x.SexID == "Male"));
+                    }
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card bg-danger">
+            <div class="card-body">
+                <h2 class="text-center">
+                   Female
+                </h2>
+                <h1 class="font-size-80 text-color-white text-center">
+                    @{
+                        ViewContext.Writer.Write(db.Residents.Count(x => x.SexID == "Female"));
+                    }
+                </h1>
+            </div>
+        </div>
+    </div>
+</div>

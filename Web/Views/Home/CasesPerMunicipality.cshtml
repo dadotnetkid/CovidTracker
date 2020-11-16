@@ -1,0 +1,51 @@
+﻿@{
+    var db = new ModelDb();
+}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-active table-bordered">
+                    <tbody>
+                    @foreach (var i in db.Cases)
+                    {
+                        <tr>
+                            <td>@i.Municipal</td>
+                            <td>@i.Active</td>
+                            <td>@i.Recovered</td>
+                            <td>@i.Death</td>
+                            <td>@i.Total</td>
+                        </tr>
+                    }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                                @{
+                                    ViewContext.Writer.Write(db.Cases.Sum(x => x.Active));
+                                }
+                            </td>
+                            <td>
+                                @{
+                                    ViewContext.Writer.Write(db.Cases.Sum(x => x.Recovered));
+                                }
+                            </td>
+                            <td>
+                                @{
+                                    ViewContext.Writer.Write(db.Cases.Sum(x => x.Death));
+                                }
+                            </td>
+                            <td>
+                                @{
+                                    ViewContext.Writer.Write(db.Cases.Sum(x => x.Total));
+                                }
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

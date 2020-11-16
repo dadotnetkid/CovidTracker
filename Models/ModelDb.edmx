@@ -24,12 +24,68 @@
           <Property Name="ActionTaken" Type="nvarchar" MaxLength="128" />
           <Property Name="TableName" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <EntityType Name="BatchNumbers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BatchNumber" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedAt" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ModifiedAt" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="Cases">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Municipal" Type="nvarchar" MaxLength="50" />
+          <Property Name="Active" Type="int" />
+          <Property Name="Recovered" Type="int" />
+          <Property Name="Death" Type="int" />
+          <Property Name="Total" Type="int" StoreGeneratedPattern="Computed" />
+        </EntityType>
         <EntityType Name="Functions">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Action" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Municipality">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Municipality" Type="nvarchar" MaxLength="50" />
+          <Property Name="Lat" Type="money" />
+          <Property Name="Long" Type="money" />
+        </EntityType>
+        <EntityType Name="Patients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BatchId" Type="int" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Suffix" Type="nvarchar" MaxLength="5" />
+          <Property Name="DOB" Type="datetime2" Precision="7" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Sex" Type="int" />
+          <Property Name="CivilStatus" Type="int" />
+          <Property Name="Nationality" Type="int" />
+          <Property Name="Mobile" Type="int" />
+          <Property Name="CurrentProvince" Type="int" />
+          <Property Name="CurrentMunicipality" Type="int" />
+          <Property Name="CurrentBarangay" Type="int" />
+          <Property Name="CurrentStreet" Type="nvarchar" MaxLength="50" />
+          <Property Name="PermanentProvince" Type="int" />
+          <Property Name="PermanentMunicipality" Type="int" />
+          <Property Name="PermanentBarangay" Type="int" />
+          <Property Name="PermanentStreet" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Provinces">
           <Key>
@@ -38,6 +94,98 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="SortOrder" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Residents">
+          <Key>
+            <PropertyRef Name="CaseID" />
+          </Key>
+          <Property Name="CaseID" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="BatchID" Type="nvarchar" MaxLength="255" />
+          <Property Name="CovidKayaID" Type="nvarchar" MaxLength="255" />
+          <Property Name="PhilhealthNumber" Type="nvarchar" MaxLength="255" />
+          <Property Name="PHNo" Type="nvarchar" MaxLength="255" />
+          <Property Name="CVNo" Type="nvarchar" MaxLength="255" />
+          <Property Name="LabResultID" Type="nvarchar" MaxLength="255" />
+          <Property Name="FacilityName" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="255" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="255" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="255" />
+          <Property Name="SuffixID" Type="nvarchar" MaxLength="255" />
+          <Property Name="BirthDate" Type="nvarchar" MaxLength="255" />
+          <Property Name="Age" Type="int" />
+          <Property Name="SexID" Type="nvarchar" MaxLength="255" />
+          <Property Name="CivilStatusID" Type="nvarchar" MaxLength="255" />
+          <Property Name="Nationality" Type="nvarchar" MaxLength="255" />
+          <Property Name="CurrentStreet" Type="nvarchar" MaxLength="255" />
+          <Property Name="CurrentRegionID" Type="nvarchar" MaxLength="255" />
+          <Property Name="CurrentProvinceID" Type="nvarchar" MaxLength="255" />
+          <Property Name="CurrentCityMunicipalityID" Type="nvarchar" MaxLength="255" />
+          <Property Name="CurrentBarangayID" Type="nvarchar" MaxLength="255" />
+          <Property Name="CurrentMobile" Type="nvarchar" MaxLength="255" />
+          <Property Name="PermanentStreet" Type="nvarchar" MaxLength="255" />
+          <Property Name="PermanentRegionID" Type="nvarchar" MaxLength="255" />
+          <Property Name="PermanentProvinceID" Type="nvarchar" MaxLength="255" />
+          <Property Name="PermanentCityMunicipalityID" Type="nvarchar" MaxLength="255" />
+          <Property Name="PermanentBarangayID" Type="nvarchar" MaxLength="255" />
+          <Property Name="SpecialPopulationID" Type="nvarchar" MaxLength="255" />
+          <Property Name="HealthCareWorkerYN" Type="nvarchar" MaxLength="255" />
+          <Property Name="Occupation" Type="nvarchar" MaxLength="255" />
+          <Property Name="ExposureID" Type="nvarchar" MaxLength="255" />
+          <Property Name="CloseContactCVNumber" Type="nvarchar" MaxLength="255" />
+          <Property Name="SpecifyExposurePlace" Type="nvarchar" MaxLength="255" />
+          <Property Name="TravelHistoryWithCovid19YN" Type="nvarchar" MaxLength="255" />
+          <Property Name="DateArrivalMNL" Type="nvarchar" MaxLength="255" />
+          <Property Name="DateArrivalRES" Type="nvarchar" MaxLength="255" />
+          <Property Name="TravelHistory14Days" Type="nvarchar" MaxLength="255" />
+          <Property Name="TravelHistory14DaysDateFrom" Type="nvarchar" MaxLength="255" />
+          <Property Name="TravelHistory14DaysFromLocation" Type="nvarchar" MaxLength="255" />
+          <Property Name="TravelHistory14DaysDateTo" Type="nvarchar" MaxLength="255" />
+          <Property Name="TravelHistory14DaysToLocation" Type="nvarchar" MaxLength="255" />
+          <Property Name="DateOnset" Type="nvarchar" MaxLength="255" />
+          <Property Name="AdmittedYN" Type="nvarchar" MaxLength="255" />
+          <Property Name="AdmittingFacilityID" Type="nvarchar" MaxLength="255" />
+          <Property Name="CurrentHealthStatus" Type="nvarchar" MaxLength="255" />
+          <Property Name="DateConsulted" Type="nvarchar" MaxLength="255" />
+          <Property Name="DateAdmitted" Type="nvarchar" MaxLength="255" />
+          <Property Name="FeverYN" Type="nvarchar" MaxLength="255" />
+          <Property Name="CoughYN" Type="nvarchar" MaxLength="255" />
+          <Property Name="ColdYN" Type="nvarchar" MaxLength="255" />
+          <Property Name="SoreThroatYN" Type="nvarchar" MaxLength="255" />
+          <Property Name="RespiratoryInfectionYN" Type="nvarchar" MaxLength="255" />
+          <Property Name="DiarrheaYN" Type="nvarchar" MaxLength="255" />
+          <Property Name="OtherSymptomsYN" Type="nvarchar" MaxLength="255" />
+          <Property Name="SpecifySymptoms" Type="nvarchar" MaxLength="255" />
+          <Property Name="HypertensionYN" Type="nvarchar" MaxLength="255" />
+          <Property Name="DiabetesYN" Type="nvarchar" MaxLength="255" />
+          <Property Name="TuberculosisYN" Type="nvarchar" MaxLength="255" />
+          <Property Name="CancerYN" Type="nvarchar" MaxLength="255" />
+          <Property Name="RenalDiseaseYN" Type="nvarchar" MaxLength="255" />
+          <Property Name="CardiacDiseaseYN" Type="nvarchar" MaxLength="255" />
+          <Property Name="AutoimmuneDiseaseYN" Type="nvarchar" MaxLength="255" />
+          <Property Name="PregnantYN" Type="nvarchar" MaxLength="255" />
+          <Property Name="HighRiskPregnancyYN" Type="nvarchar" MaxLength="255" />
+          <Property Name="OtherConditionComorbidityYN" Type="nvarchar" MaxLength="255" />
+          <Property Name="SpecifyConditionComorbidity" Type="nvarchar" MaxLength="255" />
+          <Property Name="CaseClassificationID" Type="nvarchar" MaxLength="255" />
+          <Property Name="OutcomeID" Type="nvarchar" MaxLength="255" />
+          <Property Name="DateDischarged" Type="nvarchar" MaxLength="255" />
+          <Property Name="DateRecovered" Type="nvarchar" MaxLength="255" />
+          <Property Name="DateDied" Type="nvarchar" MaxLength="255" />
+          <Property Name="CauseOfDeath" Type="nvarchar" MaxLength="255" />
+          <Property Name="QuarantineYN" Type="nvarchar" MaxLength="255" />
+          <Property Name="PlaceOfQuarantine" Type="nvarchar" MaxLength="255" />
+          <Property Name="SpecifyQuarantineLocation" Type="nvarchar" MaxLength="255" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="255" />
+          <Property Name="LaboratoryTestID" Type="nvarchar" MaxLength="255" />
+          <Property Name="LaboratoryID" Type="nvarchar" MaxLength="255" />
+          <Property Name="LaboratoryTestSerialNo" Type="nvarchar" MaxLength="255" />
+          <Property Name="DateTimeSpecimenCollected" Type="nvarchar" MaxLength="255" />
+          <Property Name="DateTimeSpecimenSentToLab" Type="nvarchar" MaxLength="255" />
+          <Property Name="DateTimeReceivedInLab" Type="nvarchar" MaxLength="255" />
+          <Property Name="DateTimeReleaseOfResult" Type="nvarchar" MaxLength="255" />
+          <Property Name="AttendingPhysician" Type="nvarchar" MaxLength="255" />
+          <Property Name="SpecimenTypeID" Type="nvarchar" MaxLength="255" />
+          <Property Name="TestTypeID" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Towns">
           <Key>
@@ -77,11 +225,11 @@
         </EntityType>
         <EntityType Name="UserRolesInFunctions">
           <Key>
-            <PropertyRef Name="FunctionId" />
-            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="Functions_Id" />
+            <PropertyRef Name="UserRoles_Id" />
           </Key>
-          <Property Name="FunctionId" Type="int" Nullable="false" />
-          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Functions_Id" Type="int" Nullable="false" />
+          <Property Name="UserRoles_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -140,6 +288,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_BatchNumbers_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="BatchNumbers" Type="Self.BatchNumbers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BatchNumbers">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BatchNumbers_Users1">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="BatchNumbers" Type="Self.BatchNumbers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BatchNumbers">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patients_BatchNumbers">
+          <End Role="BatchNumbers" Type="Self.BatchNumbers" Multiplicity="0..1" />
+          <End Role="Patients" Type="Self.Patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BatchNumbers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Patients">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Towns_Towns">
           <End Role="Provinces" Type="Self.Provinces" Multiplicity="0..1" />
           <End Role="Towns" Type="Self.Towns" Multiplicity="*" />
@@ -177,16 +361,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserRolesInFunctions_Functions">
-          <End Role="Functions" Type="Self.Functions" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="Functions" Type="Self.Functions" Multiplicity="1" />
           <End Role="UserRolesInFunctions" Type="Self.UserRolesInFunctions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Functions">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="UserRolesInFunctions">
-              <PropertyRef Name="FunctionId" />
+              <PropertyRef Name="Functions_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -198,7 +380,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="UserRolesInFunctions">
-              <PropertyRef Name="RoleId" />
+              <PropertyRef Name="UserRoles_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -229,8 +411,13 @@
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="Actions" EntityType="Self.Actions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ActionTakens" EntityType="Self.ActionTakens" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BatchNumbers" EntityType="Self.BatchNumbers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cases" EntityType="Self.Cases" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Functions" EntityType="Self.Functions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Municipality" EntityType="Self.Municipality" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provinces" EntityType="Self.Provinces" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Residents" EntityType="Self.Residents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Towns" EntityType="Self.Towns" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserClaims" EntityType="Self.UserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserLogins" EntityType="Self.UserLogins" Schema="dbo" store:Type="Tables" />
@@ -241,6 +428,18 @@
           <AssociationSet Name="FK_Actions_Actions" Association="Self.FK_Actions_Actions">
             <End Role="Actions" EntitySet="Actions" />
             <End Role="Actions1" EntitySet="Actions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BatchNumbers_Users" Association="Self.FK_BatchNumbers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="BatchNumbers" EntitySet="BatchNumbers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BatchNumbers_Users1" Association="Self.FK_BatchNumbers_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="BatchNumbers" EntitySet="BatchNumbers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patients_BatchNumbers" Association="Self.FK_Patients_BatchNumbers">
+            <End Role="BatchNumbers" EntitySet="BatchNumbers" />
+            <End Role="Patients" EntitySet="Patients" />
           </AssociationSet>
           <AssociationSet Name="FK_Towns_Towns" Association="Self.FK_Towns_Towns">
             <End Role="Provinces" EntitySet="Provinces" />
@@ -309,6 +508,23 @@
             <End Role="UserRoles" EntitySet="UserRoles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="BatchNumbers" EntityType="Model.BatchNumbers" />
+          <AssociationSet Name="FK_BatchNumbers_Users" Association="Model.FK_BatchNumbers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="BatchNumbers" EntitySet="BatchNumbers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BatchNumbers_Users1" Association="Model.FK_BatchNumbers_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="BatchNumbers" EntitySet="BatchNumbers" />
+          </AssociationSet>
+          <EntitySet Name="Patients" EntityType="Model.Patients" />
+          <AssociationSet Name="FK_Patients_BatchNumbers" Association="Model.FK_Patients_BatchNumbers">
+            <End Role="BatchNumbers" EntitySet="BatchNumbers" />
+            <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+          <EntitySet Name="Residents" EntityType="Model.Residents" />
+          <EntitySet Name="Cases" EntityType="Model.Cases" />
+          <EntitySet Name="Municipality" EntityType="Model.Municipality" />
           </EntityContainer>
         <EntityType Name="Functions">
           <Key>
@@ -456,6 +672,8 @@
           <NavigationProperty Name="UserClaims" Relationship="Model.FK_UserClaims_Users" FromRole="Users" ToRole="UserClaims" />
           <NavigationProperty Name="UserLogins" Relationship="Model.FK_UserLogins_Users" FromRole="Users" ToRole="UserLogins" />
           <NavigationProperty Name="UserRoles" Relationship="Model.UsersInRoles" FromRole="Users" ToRole="UserRoles" />
+          <NavigationProperty Name="BatchNumbersCreatedBy" Relationship="Model.FK_BatchNumbers_Users" FromRole="Users" ToRole="BatchNumbers" />
+          <NavigationProperty Name="BatchNumbersModifiedBy" Relationship="Model.FK_BatchNumbers_Users1" FromRole="Users" ToRole="BatchNumbers" />
         </EntityType>
         <Association Name="FK_UserClaims_Users">
           <End Type="Model.Users" Role="Users" Multiplicity="1" />
@@ -485,143 +703,484 @@
           <End Type="Model.UserRoles" Role="UserRoles" Multiplicity="*" />
           <End Type="Model.Users" Role="Users" Multiplicity="*" />
         </Association>
+        <EntityType Name="BatchNumbers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BatchNumber" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="CreatedByUser" Relationship="Model.FK_BatchNumbers_Users" FromRole="BatchNumbers" ToRole="Users" />
+          <NavigationProperty Name="ModifiedByUser" Relationship="Model.FK_BatchNumbers_Users1" FromRole="BatchNumbers" ToRole="Users" />
+          <NavigationProperty Name="Patients" Relationship="Model.FK_Patients_BatchNumbers" FromRole="BatchNumbers" ToRole="Patients" />
+        </EntityType>
+        <Association Name="FK_BatchNumbers_Users">
+          <End Type="Model.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="Model.BatchNumbers" Role="BatchNumbers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BatchNumbers">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BatchNumbers_Users1">
+          <End Type="Model.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="Model.BatchNumbers" Role="BatchNumbers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BatchNumbers">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Patients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="BatchId" Type="Int32" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Suffix" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="7" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Sex" Type="Int32" />
+          <Property Name="CivilStatus" Type="Int32" />
+          <Property Name="Nationality" Type="Int32" />
+          <Property Name="Mobile" Type="Int32" />
+          <Property Name="CurrentProvince" Type="Int32" />
+          <Property Name="CurrentMunicipality" Type="Int32" />
+          <Property Name="CurrentBarangay" Type="Int32" />
+          <Property Name="CurrentStreet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PermanentProvince" Type="Int32" />
+          <Property Name="PermanentMunicipality" Type="Int32" />
+          <Property Name="PermanentBarangay" Type="Int32" />
+          <Property Name="PermanentStreet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BatchNumbers" Relationship="Model.FK_Patients_BatchNumbers" FromRole="Patients" ToRole="BatchNumbers" />
+        </EntityType>
+        <Association Name="FK_Patients_BatchNumbers">
+          <End Type="Model.BatchNumbers" Role="BatchNumbers" Multiplicity="0..1" />
+          <End Type="Model.Patients" Role="Patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BatchNumbers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Patients">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Residents">
+          <Key>
+            <PropertyRef Name="CaseID" />
+          </Key>
+          <Property Name="CaseID" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BatchID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CovidKayaID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PhilhealthNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PHNo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CVNo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LabResultID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FacilityName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SuffixID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="SexID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CivilStatusID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Nationality" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentStreet" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentRegionID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentProvinceID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentCityMunicipalityID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentBarangayID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentMobile" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PermanentStreet" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PermanentRegionID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PermanentProvinceID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PermanentCityMunicipalityID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PermanentBarangayID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SpecialPopulationID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="HealthCareWorkerYN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Occupation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ExposureID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CloseContactCVNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SpecifyExposurePlace" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TravelHistoryWithCovid19YN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DateArrivalMNL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DateArrivalRES" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TravelHistory14Days" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TravelHistory14DaysDateFrom" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TravelHistory14DaysFromLocation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TravelHistory14DaysDateTo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TravelHistory14DaysToLocation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DateOnset" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AdmittedYN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AdmittingFacilityID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentHealthStatus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DateConsulted" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DateAdmitted" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FeverYN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CoughYN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ColdYN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SoreThroatYN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RespiratoryInfectionYN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DiarrheaYN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OtherSymptomsYN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SpecifySymptoms" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="HypertensionYN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DiabetesYN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TuberculosisYN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CancerYN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RenalDiseaseYN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CardiacDiseaseYN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AutoimmuneDiseaseYN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PregnantYN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="HighRiskPregnancyYN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OtherConditionComorbidityYN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SpecifyConditionComorbidity" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CaseClassificationID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OutcomeID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DateDischarged" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DateRecovered" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DateDied" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CauseOfDeath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="QuarantineYN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PlaceOfQuarantine" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SpecifyQuarantineLocation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LaboratoryTestID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LaboratoryID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LaboratoryTestSerialNo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DateTimeSpecimenCollected" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DateTimeSpecimenSentToLab" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DateTimeReceivedInLab" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DateTimeReleaseOfResult" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AttendingPhysician" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SpecimenTypeID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TestTypeID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Cases">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Municipal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Int32" />
+          <Property Name="Recovered" Type="Int32" />
+          <Property Name="Death" Type="Int32" />
+          <Property Name="Total" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Municipality">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Municipality1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lat" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Long" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="ModelDb">
-          <EntitySetMapping Name="Functions">
-            <EntityTypeMapping TypeName="Model.Functions">
-              <MappingFragment StoreEntitySet="Functions">
-                <ScalarProperty Name="Action" ColumnName="Action" />
+    <EntitySetMapping Name="Functions">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Functions)">
+        <MappingFragment StoreEntitySet="Functions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Provinces">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Provinces)">
+        <MappingFragment StoreEntitySet="Provinces">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Towns">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Towns)">
+        <MappingFragment StoreEntitySet="Towns">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserClaims">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.UserClaims)">
+        <MappingFragment StoreEntitySet="UserClaims">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserLogins">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.UserLogins)">
+        <MappingFragment StoreEntitySet="UserLogins">
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRoles">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.UserRoles)">
+        <MappingFragment StoreEntitySet="UserRoles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Actions">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Actions)">
+        <MappingFragment StoreEntitySet="Actions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ItemOrder" ColumnName="ItemOrder" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActionTakens">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ActionTakens)">
+        <MappingFragment StoreEntitySet="ActionTakens">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ActionTaken" ColumnName="ActionTaken" />
+          <ScalarProperty Name="TableName" ColumnName="TableName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Users)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="CivilStatus" ColumnName="CivilStatus" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+          <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+          <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+          <ScalarProperty Name="TownCity" ColumnName="TownCity" />
+          <ScalarProperty Name="Cellular" ColumnName="Cellular" />
+          <ScalarProperty Name="Height" ColumnName="Height" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Religion" ColumnName="Religion" />
+          <ScalarProperty Name="Citizenship" ColumnName="Citizenship" />
+          <ScalarProperty Name="Languages" ColumnName="Languages" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="UserRolesInFunctions" TypeName="Model.UserRolesInFunctions" StoreEntitySet="UserRolesInFunctions">
+      <EndProperty Name="Functions">
+        <ScalarProperty Name="Id" ColumnName="Functions_Id" />
+      </EndProperty>
+      <EndProperty Name="UserRoles">
+        <ScalarProperty Name="Id" ColumnName="UserRoles_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UsersInRoles" TypeName="Model.UsersInRoles" StoreEntitySet="UsersInRoles">
+      <EndProperty Name="UserRoles">
+        <ScalarProperty Name="Id" ColumnName="UserRoles_Id" />
+      </EndProperty>
+      <EndProperty Name="Users">
+        <ScalarProperty Name="Id" ColumnName="Users_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+          <EntitySetMapping Name="BatchNumbers">
+            <EntityTypeMapping TypeName="Model.BatchNumbers">
+              <MappingFragment StoreEntitySet="BatchNumbers">
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="BatchNumber" ColumnName="BatchNumber" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Provinces">
-            <EntityTypeMapping TypeName="Model.Provinces">
-              <MappingFragment StoreEntitySet="Provinces">
-                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Towns">
-            <EntityTypeMapping TypeName="Model.Towns">
-              <MappingFragment StoreEntitySet="Towns">
-                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
-                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserClaims">
-            <EntityTypeMapping TypeName="Model.UserClaims">
-              <MappingFragment StoreEntitySet="UserClaims">
-                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserLogins">
-            <EntityTypeMapping TypeName="Model.UserLogins">
-              <MappingFragment StoreEntitySet="UserLogins">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
-                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserRoles">
-            <EntityTypeMapping TypeName="Model.UserRoles">
-              <MappingFragment StoreEntitySet="UserRoles">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="UserRolesInFunctions" TypeName="Model.UserRolesInFunctions" StoreEntitySet="UserRolesInFunctions">
-            <EndProperty Name="UserRoles">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-            <EndProperty Name="Functions">
-              <ScalarProperty Name="Id" ColumnName="FunctionId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <EntitySetMapping Name="Actions">
-            <EntityTypeMapping TypeName="Model.Actions">
-              <MappingFragment StoreEntitySet="Actions">
-                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="ItemOrder" ColumnName="ItemOrder" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ActionTakens">
-            <EntityTypeMapping TypeName="Model.ActionTakens">
-              <MappingFragment StoreEntitySet="ActionTakens">
-                <ScalarProperty Name="TableName" ColumnName="TableName" />
-                <ScalarProperty Name="ActionTaken" ColumnName="ActionTaken" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="Model.Users">
-              <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
-                <ScalarProperty Name="Position" ColumnName="Position" />
-                <ScalarProperty Name="Languages" ColumnName="Languages" />
-                <ScalarProperty Name="Citizenship" ColumnName="Citizenship" />
-                <ScalarProperty Name="Religion" ColumnName="Religion" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Height" ColumnName="Height" />
-                <ScalarProperty Name="Cellular" ColumnName="Cellular" />
-                <ScalarProperty Name="TownCity" ColumnName="TownCity" />
-                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
-                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
-                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="Model.Patients">
+              <MappingFragment StoreEntitySet="Patients">
+                <ScalarProperty Name="PermanentStreet" ColumnName="PermanentStreet" />
+                <ScalarProperty Name="PermanentBarangay" ColumnName="PermanentBarangay" />
+                <ScalarProperty Name="PermanentMunicipality" ColumnName="PermanentMunicipality" />
+                <ScalarProperty Name="PermanentProvince" ColumnName="PermanentProvince" />
+                <ScalarProperty Name="CurrentStreet" ColumnName="CurrentStreet" />
+                <ScalarProperty Name="CurrentBarangay" ColumnName="CurrentBarangay" />
+                <ScalarProperty Name="CurrentMunicipality" ColumnName="CurrentMunicipality" />
+                <ScalarProperty Name="CurrentProvince" ColumnName="CurrentProvince" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
                 <ScalarProperty Name="CivilStatus" ColumnName="CivilStatus" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Suffix" ColumnName="Suffix" />
                 <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
-                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="UsersInRoles" TypeName="Model.UsersInRoles" StoreEntitySet="UsersInRoles">
-            <EndProperty Name="Users">
-              <ScalarProperty Name="Id" ColumnName="Users_Id" />
-            </EndProperty>
-            <EndProperty Name="UserRoles">
-              <ScalarProperty Name="Id" ColumnName="UserRoles_Id" />
-            </EndProperty>
-          </AssociationSetMapping>
-          </EntityContainerMapping>
+          <EntitySetMapping Name="Residents">
+            <EntityTypeMapping TypeName="Model.Residents">
+              <MappingFragment StoreEntitySet="Residents">
+                <ScalarProperty Name="TestTypeID" ColumnName="TestTypeID" />
+                <ScalarProperty Name="SpecimenTypeID" ColumnName="SpecimenTypeID" />
+                <ScalarProperty Name="AttendingPhysician" ColumnName="AttendingPhysician" />
+                <ScalarProperty Name="DateTimeReleaseOfResult" ColumnName="DateTimeReleaseOfResult" />
+                <ScalarProperty Name="DateTimeReceivedInLab" ColumnName="DateTimeReceivedInLab" />
+                <ScalarProperty Name="DateTimeSpecimenSentToLab" ColumnName="DateTimeSpecimenSentToLab" />
+                <ScalarProperty Name="DateTimeSpecimenCollected" ColumnName="DateTimeSpecimenCollected" />
+                <ScalarProperty Name="LaboratoryTestSerialNo" ColumnName="LaboratoryTestSerialNo" />
+                <ScalarProperty Name="LaboratoryID" ColumnName="LaboratoryID" />
+                <ScalarProperty Name="LaboratoryTestID" ColumnName="LaboratoryTestID" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="SpecifyQuarantineLocation" ColumnName="SpecifyQuarantineLocation" />
+                <ScalarProperty Name="PlaceOfQuarantine" ColumnName="PlaceOfQuarantine" />
+                <ScalarProperty Name="QuarantineYN" ColumnName="QuarantineYN" />
+                <ScalarProperty Name="CauseOfDeath" ColumnName="CauseOfDeath" />
+                <ScalarProperty Name="DateDied" ColumnName="DateDied" />
+                <ScalarProperty Name="DateRecovered" ColumnName="DateRecovered" />
+                <ScalarProperty Name="DateDischarged" ColumnName="DateDischarged" />
+                <ScalarProperty Name="OutcomeID" ColumnName="OutcomeID" />
+                <ScalarProperty Name="CaseClassificationID" ColumnName="CaseClassificationID" />
+                <ScalarProperty Name="SpecifyConditionComorbidity" ColumnName="SpecifyConditionComorbidity" />
+                <ScalarProperty Name="OtherConditionComorbidityYN" ColumnName="OtherConditionComorbidityYN" />
+                <ScalarProperty Name="HighRiskPregnancyYN" ColumnName="HighRiskPregnancyYN" />
+                <ScalarProperty Name="PregnantYN" ColumnName="PregnantYN" />
+                <ScalarProperty Name="AutoimmuneDiseaseYN" ColumnName="AutoimmuneDiseaseYN" />
+                <ScalarProperty Name="CardiacDiseaseYN" ColumnName="CardiacDiseaseYN" />
+                <ScalarProperty Name="RenalDiseaseYN" ColumnName="RenalDiseaseYN" />
+                <ScalarProperty Name="CancerYN" ColumnName="CancerYN" />
+                <ScalarProperty Name="TuberculosisYN" ColumnName="TuberculosisYN" />
+                <ScalarProperty Name="DiabetesYN" ColumnName="DiabetesYN" />
+                <ScalarProperty Name="HypertensionYN" ColumnName="HypertensionYN" />
+                <ScalarProperty Name="SpecifySymptoms" ColumnName="SpecifySymptoms" />
+                <ScalarProperty Name="OtherSymptomsYN" ColumnName="OtherSymptomsYN" />
+                <ScalarProperty Name="DiarrheaYN" ColumnName="DiarrheaYN" />
+                <ScalarProperty Name="RespiratoryInfectionYN" ColumnName="RespiratoryInfectionYN" />
+                <ScalarProperty Name="SoreThroatYN" ColumnName="SoreThroatYN" />
+                <ScalarProperty Name="ColdYN" ColumnName="ColdYN" />
+                <ScalarProperty Name="CoughYN" ColumnName="CoughYN" />
+                <ScalarProperty Name="FeverYN" ColumnName="FeverYN" />
+                <ScalarProperty Name="DateAdmitted" ColumnName="DateAdmitted" />
+                <ScalarProperty Name="DateConsulted" ColumnName="DateConsulted" />
+                <ScalarProperty Name="CurrentHealthStatus" ColumnName="CurrentHealthStatus" />
+                <ScalarProperty Name="AdmittingFacilityID" ColumnName="AdmittingFacilityID" />
+                <ScalarProperty Name="AdmittedYN" ColumnName="AdmittedYN" />
+                <ScalarProperty Name="DateOnset" ColumnName="DateOnset" />
+                <ScalarProperty Name="TravelHistory14DaysToLocation" ColumnName="TravelHistory14DaysToLocation" />
+                <ScalarProperty Name="TravelHistory14DaysDateTo" ColumnName="TravelHistory14DaysDateTo" />
+                <ScalarProperty Name="TravelHistory14DaysFromLocation" ColumnName="TravelHistory14DaysFromLocation" />
+                <ScalarProperty Name="TravelHistory14DaysDateFrom" ColumnName="TravelHistory14DaysDateFrom" />
+                <ScalarProperty Name="TravelHistory14Days" ColumnName="TravelHistory14Days" />
+                <ScalarProperty Name="DateArrivalRES" ColumnName="DateArrivalRES" />
+                <ScalarProperty Name="DateArrivalMNL" ColumnName="DateArrivalMNL" />
+                <ScalarProperty Name="TravelHistoryWithCovid19YN" ColumnName="TravelHistoryWithCovid19YN" />
+                <ScalarProperty Name="SpecifyExposurePlace" ColumnName="SpecifyExposurePlace" />
+                <ScalarProperty Name="CloseContactCVNumber" ColumnName="CloseContactCVNumber" />
+                <ScalarProperty Name="ExposureID" ColumnName="ExposureID" />
+                <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+                <ScalarProperty Name="HealthCareWorkerYN" ColumnName="HealthCareWorkerYN" />
+                <ScalarProperty Name="SpecialPopulationID" ColumnName="SpecialPopulationID" />
+                <ScalarProperty Name="PermanentBarangayID" ColumnName="PermanentBarangayID" />
+                <ScalarProperty Name="PermanentCityMunicipalityID" ColumnName="PermanentCityMunicipalityID" />
+                <ScalarProperty Name="PermanentProvinceID" ColumnName="PermanentProvinceID" />
+                <ScalarProperty Name="PermanentRegionID" ColumnName="PermanentRegionID" />
+                <ScalarProperty Name="PermanentStreet" ColumnName="PermanentStreet" />
+                <ScalarProperty Name="CurrentMobile" ColumnName="CurrentMobile" />
+                <ScalarProperty Name="CurrentBarangayID" ColumnName="CurrentBarangayID" />
+                <ScalarProperty Name="CurrentCityMunicipalityID" ColumnName="CurrentCityMunicipalityID" />
+                <ScalarProperty Name="CurrentProvinceID" ColumnName="CurrentProvinceID" />
+                <ScalarProperty Name="CurrentRegionID" ColumnName="CurrentRegionID" />
+                <ScalarProperty Name="CurrentStreet" ColumnName="CurrentStreet" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="CivilStatusID" ColumnName="CivilStatusID" />
+                <ScalarProperty Name="SexID" ColumnName="SexID" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="SuffixID" ColumnName="SuffixID" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FacilityName" ColumnName="FacilityName" />
+                <ScalarProperty Name="LabResultID" ColumnName="LabResultID" />
+                <ScalarProperty Name="CVNo" ColumnName="CVNo" />
+                <ScalarProperty Name="PHNo" ColumnName="PHNo" />
+                <ScalarProperty Name="PhilhealthNumber" ColumnName="PhilhealthNumber" />
+                <ScalarProperty Name="CovidKayaID" ColumnName="CovidKayaID" />
+                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+                <ScalarProperty Name="CaseID" ColumnName="CaseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cases">
+            <EntityTypeMapping TypeName="Model.Cases">
+              <MappingFragment StoreEntitySet="Cases">
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Death" ColumnName="Death" />
+                <ScalarProperty Name="Recovered" ColumnName="Recovered" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Municipal" ColumnName="Municipal" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Municipality">
+            <EntityTypeMapping TypeName="Model.Municipality">
+              <MappingFragment StoreEntitySet="Municipality">
+                <ScalarProperty Name="Long" ColumnName="Long" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="Municipality1" ColumnName="Municipality" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+  </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->

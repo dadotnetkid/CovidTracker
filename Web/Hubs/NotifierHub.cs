@@ -18,18 +18,5 @@ namespace Web.Hubs
         //}
 
 
-        public void GetAllSMS()
-        {
-            UnitOfWork unitOfWork = new UnitOfWork();
-            Clients.All.GetAll(unitOfWork.MessagesRepo.Get(m => m.IsSent == false));
-        }
-
-        public void UpdateSms(Messages messages)
-        {
-            UnitOfWork unitOfWork = new UnitOfWork();
-            var res = unitOfWork.MessagesRepo.Find(x => x.Id == messages.Id);
-            res.IsSent = true;
-            unitOfWork.Save();
-        }
     }
 }

@@ -28,6 +28,28 @@ namespace Models.Repository
 
         }
 
+        private GenericRepository<Patients> _PatientsRepo;
+        public GenericRepository<Patients> PatientsRepo
+        {
+            get
+            {
+                if (this._PatientsRepo == null)
+                    this._PatientsRepo = new GenericRepository<Patients>(context);
+                return _PatientsRepo;
+            }
+            set { _PatientsRepo = value; }
+        }
+        private GenericRepository<BatchNumbers> _BatchNumbersRepo;
+        public GenericRepository<BatchNumbers> BatchNumbersRepo
+        {
+            get
+            {
+                if (this._BatchNumbersRepo == null)
+                    this._BatchNumbersRepo = new GenericRepository<BatchNumbers>(context);
+                return _BatchNumbersRepo;
+            }
+            set { _BatchNumbersRepo = value; }
+        }
         private GenericRepository<Functions> _FunctionsRepo;
         public GenericRepository<Functions> FunctionsRepo
         {

@@ -1,67 +1,55 @@
-﻿@using Web.Controllers
-@*<p>@ViewContext.RouteData.Values["Controller"].ToString()</p>*@
-<!-- Left side column. contains the logo and sidebar -->
-<aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-        <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">MAIN NAVIGATION</li>
-            @if (User.Identity.Name == "PHO@nuevavizcaya.gov.ph")
-            {
-                <li class="@(ControllerHelpers.IsMenuBarActive("Index","Admin")? "active":"")">
-                    <a href="@Url.Action("Index", "Admin")"><i class="ion ion-home"></i> <span>Tracker</span></a>
-                </li>
-            }
-        @if (User.Identity.Name != "PHO@nuevavizcaya.gov.ph")
-        {
-            <li class="@(ControllerHelpers.IsMenuBarActive("Repatriates", "Admin") ? "active" : "")">
-                <a href="@Url.Action("Repatriates", "Admin")"><i class="fa fa-users"></i> <span>LSI</span></a>
-            </li>
-            <li class="@(ControllerHelpers.IsMenuBarActive("Vehicles", "Admin") ? "active" : "")">
-                <a href="@Url.Action("Vehicles", "Admin")"><i class="fa fa-bus"></i> <span>Vehicles</span></a>
-            </li>
+﻿<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-            <li class="treeview @(ControllerHelpers.IsControllerName("Report") ? " menu-open" : "")"style="height: auto;">
-                <a href="#">
-                    <i class="fa fa-file"></i> <span>Reports</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu" style="display:block">
-                    <li class="@(ControllerHelpers.IsMenuBarActive("LSIReport", "report") ? "active" : "")">
-                        <a href="@Url.Action("LSIReport", "report")"><i class="fa fa-bus"></i> <span> LSI</span></a>
-                    </li>
-                    <li class="@(ControllerHelpers.IsMenuBarActive("VehicleReports", "report") ? "active" : "")">
-                        <a href="@Url.Action("VehicleReports", "report")"><i class="fa fa-bus"></i> <span> Vehicles</span></a>
-                    </li>
-                    <li class="@(ControllerHelpers.IsMenuBarActive("LSIMasterlist", "report") ? "active" : "")">
-                        <a href="@Url.Action("LSIMasterlist", "report")"><i class="fa fa-bus"></i> <span> MasterList</span></a>
-                    </li>
-                </ul>
-            </li>
+    <!-- Sidebar - Brand -->
+    @Html.Partial("_brand")
 
-            <li class="treeview @(ControllerHelpers.IsControllerName("Users") ? "menu-open" : "")" style="height: auto;">
-                <a href="#">
-                    <i class="fa fa-gear"></i> <span>Maintenance</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
 
-                    <li class="@(ControllerHelpers.IsMenuBarActive("users", "Users") ? "active" : "")">
-                        <a href="@Url.Action("users", "Users")"><i class="fa fa-circle"></i> <span>Users</span></a>
-                    </li>
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+        <a class="nav-link" href="/">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+        </a>
+    </li>
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0"/>
+    <li class="nav-item">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#patientsUtilities" aria-expanded="true" aria-controls="patientsUtilities">
+            <i class="fas fa-fw fa-hospital-user"></i>
+            <span>Patients</span>
+        </a>
+        <div id="patientsUtilities" class="collapse " aria-labelledby="headingUtilities" data-parent="#accordionSidebar" style="">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Patients:</h6>
+                <a class="collapse-item" href="@Url.Action("Batch", "Patients")">Batch Number</a>
+     
+            </div>
+        </div>
+    </li>
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0"/>
+    @* Divider *@
+    @if (User.UserIsInAction("Users"))
+    {
+        <li class="nav-item">
+            <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>Utilities</span>
+            </a>
+            <div id="collapseUtilities" class="collapse " aria-labelledby="headingUtilities" data-parent="#accordionSidebar" style="">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Utilities:</h6>
+                    <a class="collapse-item" href="@Url.Action("Users", "Users")">Users</a>
+                    <a class="collapse-item" href="@Url.Action("UserRoles", "Users")">User Roles</a>
+                </div>
+            </div>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider"/>
+    }
 
 
-                    @*<li class="@(ViewContext.RouteData.Values["Action"].ToString() == nameof(MaintenanceController.Controllers).ToLower() && ViewContext.RouteData.Values["Controller"].ToString() == "maintenance" ? "active" : "")">
-                            <a href="@Url.Action("controllers", "maintenance")"><i class="fa fa-circle"></i> <span>Authorized Users</span></a>
-                        </li>*@
-                </ul>
-            </li>
-        }
-        </ul>
-    </section>
-    <!-- /.sidebar -->
-</aside>
+
+</ul>

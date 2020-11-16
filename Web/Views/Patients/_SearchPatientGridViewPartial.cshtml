@@ -1,0 +1,52 @@
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        var model = ViewBag.patients as Patients;
+        settings.Name = "SearchPatientGridView";
+        settings.CallbackRouteValues = new {Controller = "Patients", Action = "SearchPatientGridViewPartial", LastName = model.LastName, FirstName = model.FirstName, MiddleName = model.MiddleName};
+
+        settings.SettingsEditing.AddNewRowRouteValues = new {Controller = "Patients", Action = "SearchPatientGridViewPartialAddNew"};
+        settings.SettingsEditing.UpdateRowRouteValues = new {Controller = "Patients", Action = "SearchPatientGridViewPartialUpdate"};
+        settings.SettingsEditing.DeleteRowRouteValues = new {Controller = "Patients", Action = "SearchPatientGridViewPartialDelete"};
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+
+        settings.KeyFieldName = "Id";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCells;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = true;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.Columns.Add("LastName");
+        settings.Columns.Add("FirstName");
+        settings.Columns.Add("MiddleName");
+        settings.Columns.Add("Age");
+        settings.Columns.Add("Sex");
+        settings.CustomJSProperties = (sender, e) =>
+        {
+            if (sender is MVCxGridView gridView)
+            {
+                if (ViewBag.isSearch)
+                    e.Properties["cpVisibleRowCount"] = ViewBag.counter;
+            }
+        };
+        settings.ClientSideEvents.Init = "function(s, e) { checkIfNoSearch(s.cpVisibleRowCount)}";
+    });
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string) ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

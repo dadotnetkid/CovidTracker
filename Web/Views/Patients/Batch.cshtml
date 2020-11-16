@@ -1,0 +1,32 @@
+﻿@using Breadcrumbs = Models.ViewModels.Breadcrumbs
+@{
+    ViewBag.Title = "Batch";
+    ViewBag.Breadcrumbs = new List<Breadcrumbs>()
+    {
+        new Breadcrumbs() {Breadcrumb = "Patients", ItemNumber = 1},
+        new Breadcrumbs() {Breadcrumb = "Batch", Active = true, ItemNumber = 2}
+    };
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<div id="container">
+
+    @Html.Action("BatchGridViewPartial")
+</div>
+
+<script>
+    function GenerateBatchNumber() {
+        var res = confirm("Do you want to generate batch number");
+        if (res)
+            $.ajax({
+                url: '@Url.Action("BatchGridViewPartialAddNew")',
+                method: 'POST',
+                success: function(ret) {
+                    $('#container').html(ret);
+                }
+            });
+    }
+    
+</script>

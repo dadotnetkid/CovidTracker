@@ -1,0 +1,93 @@
+﻿<div class="row ">
+    <div class="col-4">
+        <div class="card ">
+            <div class="card-header">
+                <i class="fa fa-virus"></i>
+            </div>
+            <div class="card-body">
+                @using (Ajax.BeginForm("SearchPatientGridViewPartial", new {isSearch = true}, new AjaxOptions()
+                {
+                    UpdateTargetId = "search-result",
+                    OnBegin = "ldpLoading.Show()",
+                    OnComplete = "ldpLoading.Hide()",
+                    InsertionMode = InsertionMode.Replace
+                }))
+                {
+                    <div class="row">
+                        <div class="col-12">
+
+                            @{
+                                Html.DevExpress().Label(x =>
+                                {
+                                    x.Text = "Last Name:";
+                                    x.AssociatedControlName = "Lastname";
+                                }).GetHtml();
+                                Html.DevExpress().TextBox(settings =>
+                                {
+                                    settings.Width = Unit.Percentage(100);
+                                    settings.Name = "LastName";
+                                }).GetHtml();
+                            }
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @{
+                                Html.DevExpress().Label(x =>
+                                {
+                                    x.Text = "First Name:";
+                                    x.AssociatedControlName = "FirstName";
+                                }).GetHtml();
+                                Html.DevExpress().TextBox(settings =>
+                                {
+                                    settings.Width = Unit.Percentage(100);
+                                    settings.Name = "FirstName";
+                                }).GetHtml();
+                            }
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @{
+                                Html.DevExpress().Label(x =>
+                                {
+                                    x.Text = "Middle Name:";
+                                    x.AssociatedControlName = "MiddleName";
+                                }).GetHtml();
+                                Html.DevExpress().TextBox(settings =>
+                                {
+                                    settings.Width = Unit.Percentage(100);
+                                    settings.Name = "MiddleName";
+                                }).GetHtml();
+                            }
+
+                        </div>
+                    </div>
+                    <div class="row margin-top-10">
+                        <div class="col-12">
+                            @{
+                                Html.DevExpress().Button(settings =>
+                                {
+                                    settings.Name = "btnSearchCase";
+                                    settings.Text = "Search";
+                                    settings.Width = Unit.Percentage(100);
+                                    settings.UseSubmitBehavior = true;
+                                }).GetHtml();
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-8" id="search-result">
+        @{
+            Html.RenderAction("SearchPatientGridViewPartial");
+        }
+    </div>
+</div>
+<script>
+
+</script>

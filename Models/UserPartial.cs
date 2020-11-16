@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Security.Claims;
@@ -15,12 +18,12 @@ namespace Models
     [MetadataType(typeof(UsersMeta))]
     public partial class Users : IUser<string>
     {
-        [Newtonsoft.Json.JsonIgnoreAttribute]
-        public bool IsSelectedUserInDocuments { get; set; }
+        [Newtonsoft.Json.JsonIgnoreAttribute] public bool IsSelectedUserInDocuments { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [NotMapped]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)] [NotMapped]
         private string _userRole;
+
+        private byte[] _userImage;
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         [NotMapped]
@@ -47,6 +50,27 @@ namespace Models
         [Newtonsoft.Json.JsonIgnoreAttribute]
         public string Password { get; set; }
 
+        public IEnumerable<string> Roles { get; set; }
+
+        public Byte[] UserImage
+        {
+            get
+            {
+                if (_userImage == null)
+                {
+                    var path = HttpContext.Current.Server.MapPath($"~/content/images/User-Images/{this.Id}");
+                    if (!File.Exists(path))
+                        path = HttpContext.Current.Server.MapPath($"~/content/images/User-Images/default-img.png");
+                    var img = Image.FromFile(path);
+                    var ms = new MemoryStream();
+                    img.Save(ms, ImageFormat.Bmp);
+                    _userImage = ms.ToArray();
+                }
+
+                return _userImage;
+            }
+            set => _userImage = value;
+        }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<Users, string> manager)
         {
@@ -59,7 +83,8 @@ namespace Models
         }
 
 
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<Users, string> manager, string authenticationType)
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<Users, string> manager,
+            string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
@@ -70,7 +95,6 @@ namespace Models
             // Add custom user claims here
             return userIdentity;
         }
-
     }
 
 
@@ -79,6 +103,5 @@ namespace Models
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-
     }
 }
